@@ -12,8 +12,12 @@ namespace BaseApi.V1.Factories
 
             return new Entity
             {
-                Id = databaseEntity.Id,
-                CreatedAt = databaseEntity.CreatedAt
+                Line1 = databaseEntity.Line1,
+                Line2 = databaseEntity.Line2,
+                Line3 = databaseEntity.Line3,
+                Line4 = databaseEntity.Line4,
+                Postcode = databaseEntity.Postcode
+                
             };
         }
 
@@ -23,8 +27,11 @@ namespace BaseApi.V1.Factories
 
             return new DatabaseEntity
             {
-                Id = entity.Id,
-                CreatedAt = entity.CreatedAt
+                Line1 = entity.Line1,
+                Line2 = entity.Line2,
+                Line3 = entity.Line3,
+                Line4 = entity.Line4,
+                Postcode = entity.Postcode
             };
         }
     }

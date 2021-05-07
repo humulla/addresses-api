@@ -1,3 +1,4 @@
+using BaseApi.V1.Boundary;
 using BaseApi.V1.Boundary.Response;
 using BaseApi.V1.Factories;
 using BaseApi.V1.Gateways;
@@ -14,9 +15,9 @@ namespace BaseApi.V1.UseCase
             _gateway = gateway;
         }
 
-        public ResponseObjectList Execute()
+        public ResponseObject Execute(RequestQueryParameter requestQueryParameter)
         {
-            return new ResponseObjectList { ResponseObjects = _gateway.GetAll().ToResponse() };
+            return _gateway.GetEntityById(requestQueryParameter).ToResponse();
         }
     }
 }

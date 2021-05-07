@@ -1,5 +1,7 @@
 using System.Linq;
+using Amazon.DynamoDBv2;
 using AutoFixture;
+using BaseApi.V1.Boundary;
 using BaseApi.V1.Boundary.Response;
 using BaseApi.V1.Domain;
 using BaseApi.V1.Factories;
@@ -28,12 +30,13 @@ namespace BaseApi.Tests.V1.UseCase
         [Test]
         public void GetsAllFromTheGateway()
         {
-            var stubbedEntities = _fixture.CreateMany<Entity>().ToList();
-            _mockGateway.Setup(x => x.GetAll()).Returns(stubbedEntities);
+            var stubbedEntities = _fixture.Create<Entity>();
+            var parameter = _fixture.Create<RequestQueryParameter>();
+            _mockGateway.Setup(x => x.GetEntityById(parameter)).Returns(stubbedEntities);
 
-            var expectedResponse = new ResponseObjectList { ResponseObjects = stubbedEntities.ToResponse() };
+            var expectedResponse = new ResponseObject {};
 
-            _classUnderTest.Execute().Should().BeEquivalentTo(expectedResponse);
+            _classUnderTest.Execute(parameter).Should().BeEquivalentTo(expectedResponse);
         }
 
         //TODO: Add extra tests here for extra functionality added to the use case
